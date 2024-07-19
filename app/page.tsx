@@ -1,6 +1,10 @@
+import Hero from "@/components/Hero";
+
 const page = () => {
   return (
-    <div>page</div>
-  )
-}
-export default page
+    <main className="overflow-hidden">
+      <Hero />
+    </main>
+  );
+};
+export default page;
