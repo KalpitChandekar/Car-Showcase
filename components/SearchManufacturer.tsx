@@ -1,8 +1,8 @@
-import { manufacturers } from "@/constants";
-import { SearchManuFacturerProps } from "@/types";
-import { Combobox, ComboboxButton, ComboboxInput, ComboboxOption, ComboboxOptions, Transition } from "@headlessui/react";
 import Image from "next/image";
 import { Fragment, useState } from "react";
+import { Combobox, Transition } from "@headlessui/react";
+import { SearchManuFacturerProps } from "@/types";
+import { manufacturers } from "@/constants";
 
 
 const SearchManufacturer = ({
@@ -26,7 +26,7 @@ const SearchManufacturer = ({
       <Combobox value={manufacturer} onChange={setManuFacturer}>
         <div className="relative w-full">
           {/* Button for the combobox. Click on the icon to see the complete dropdown */}
-          <ComboboxButton className="absolute top-[14px]">
+          <Combobox.Button className="absolute top-[14px]">
             <Image
               src="/car-logo.svg"
               width={20}
@@ -34,10 +34,10 @@ const SearchManufacturer = ({
               className="ml-4"
               alt="car logo"
             />
-          </ComboboxButton>
+          </Combobox.Button>
 
           {/* Input field for searching */}
-          <ComboboxInput
+          <Combobox.Input
             className="search-manufacturer__input"
             displayValue={(item: string) => item}
             onChange={(event) => setQuery(event.target.value)} // Update the search query when the input changes
@@ -52,20 +52,20 @@ const SearchManufacturer = ({
             leaveTo="opacity-0"
             afterLeave={() => setQuery("")} // Reset the search query after the transition completes
           >
-            <ComboboxOption
+            <Combobox.Options
               className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
               static
             >
               {filteredManufacturers.length === 0 && query !== "" ? (
-                <ComboboxOption
+                <Combobox.Option
                   value={query}
                   className="search-manufacturer__option"
                 >
                   Create "{query}"
-                </ComboboxOption>
+                </Combobox.Option>
               ) : (
                 filteredManufacturers.map((item) => (
-                  <ComboboxOption
+                  <Combobox.Option
                     key={item}
                     className={({ active }) =>
                       `relative search-manufacturer__option ${
@@ -96,10 +96,10 @@ const SearchManufacturer = ({
                         ) : null}
                       </>
                     )}
-                  </ComboboxOption>
+                  </Combobox.Option>
                 ))
               )}
-            </ComboboxOption>
+            </Combobox.Options>
           </Transition>
         </div>
       </Combobox>
